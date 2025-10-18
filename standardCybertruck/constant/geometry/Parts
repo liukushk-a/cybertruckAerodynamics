@@ -1,0 +1,131 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 12-86e126a7bc4d
+Exec   : surfaceCheck cybertruckRealMeasuring.stl
+Date   : Oct 17 2025
+Time   : 09:53:12
+Host   : "liukushka"
+PID    : 12509
+I/O    : uncollated
+Case   : /home/liukushka/OpenFOAM/liukushka-12/run/cybertruck/tesla-cybertruck/constant/geometry
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Reading surface from "cybertruckRealMeasuring.stl" ...
+
+Statistics:
+Triangles    : 8006
+Vertices     : 4081
+Bounding Box : (2.20515 -4.13497 0.287224) (4.2018 1.54796 2.02823)
+
+Region	Size
+------	----
+zone0	8006
+
+
+Surface has no illegal triangles.
+
+Triangle quality (equilateral=1, collapsed=0):
+    0 .. 0.05  : 0.0577067
+    0.05 .. 0.1  : 0.0263552
+    0.1 .. 0.15  : 0.0314764
+    0.15 .. 0.2  : 0.0269798
+    0.2 .. 0.25  : 0.0588309
+    0.25 .. 0.3  : 0.0518361
+    0.3 .. 0.35  : 0.0455908
+    0.35 .. 0.4  : 0.0760679
+    0.4 .. 0.45  : 0.0734449
+    0.45 .. 0.5  : 0.0667
+    0.5 .. 0.55  : 0.0865601
+    0.55 .. 0.6  : 0.058706
+    0.6 .. 0.65  : 0.0495878
+    0.65 .. 0.7  : 0.0480889
+    0.7 .. 0.75  : 0.0578316
+    0.75 .. 0.8  : 0.0505871
+    0.8 .. 0.85  : 0.0474644
+    0.85 .. 0.9  : 0.0191107
+    0.9 .. 0.95  : 0.0354734
+    0.95 .. 1  : 0.0316013
+
+    min 0 for triangle 389
+    max 0.999677 for triangle 4623
+
+--> FOAM Warning : 
+    From function int main(int, char**)
+    in file surfaceCheck.C at line 375
+    0. This might give problems in self-intersection testing later on.
+Dumping bad quality faces to "badFaces"
+Paste this into the input for surfaceSubset
+
+
+Edges:
+    min 0.0025794 for edge 1709 points (4.13378 0.430816 0.990091)(4.13247 0.430832 0.987869)
+    max 2.6137 for edge 642 points (3.20629 -2.67919 0.63005)(3.66039 -0.105238 0.632341)
+
+Checking for points less than 1e-6 of bounding box ((1.99665 5.68293 1.74101) metre) apart.
+Found 0 nearby points.
+
+Surface is not closed since not all edges connected to two faces:
+    connected to one face : 16
+    connected to >2 faces : 0
+Conflicting face labels:16
+Dumping conflicting face labels to "problemFaces"
+Paste this into the input for surfaceSubset
+
+Number of unconnected parts : 37
+Splitting surface into parts ...
+
+Writing zoning to "zone_cybertruckRealMeasuring.vtk"...
+
+writing part 0 size 870 to "cybertruckRealMeasuring_0.obj"
+writing part 1 size 10 to "cybertruckRealMeasuring_1.obj"
+writing part 2 size 10 to "cybertruckRealMeasuring_2.obj"
+writing part 3 size 10 to "cybertruckRealMeasuring_3.obj"
+writing part 4 size 10 to "cybertruckRealMeasuring_4.obj"
+writing part 5 size 1634 to "cybertruckRealMeasuring_5.obj"
+writing part 6 size 20 to "cybertruckRealMeasuring_6.obj"
+writing part 7 size 20 to "cybertruckRealMeasuring_7.obj"
+writing part 8 size 20 to "cybertruckRealMeasuring_8.obj"
+writing part 9 size 20 to "cybertruckRealMeasuring_9.obj"
+writing part 10 size 20 to "cybertruckRealMeasuring_10.obj"
+writing part 11 size 20 to "cybertruckRealMeasuring_11.obj"
+writing part 12 size 20 to "cybertruckRealMeasuring_12.obj"
+writing part 13 size 1634 to "cybertruckRealMeasuring_13.obj"
+writing part 14 size 20 to "cybertruckRealMeasuring_14.obj"
+writing part 15 size 20 to "cybertruckRealMeasuring_15.obj"
+writing part 16 size 20 to "cybertruckRealMeasuring_16.obj"
+writing part 17 size 20 to "cybertruckRealMeasuring_17.obj"
+writing part 18 size 20 to "cybertruckRealMeasuring_18.obj"
+writing part 19 size 20 to "cybertruckRealMeasuring_19.obj"
+writing part 20 size 20 to "cybertruckRealMeasuring_20.obj"
+writing part 21 size 1634 to "cybertruckRealMeasuring_21.obj"
+writing part 22 size 20 to "cybertruckRealMeasuring_22.obj"
+writing part 23 size 20 to "cybertruckRealMeasuring_23.obj"
+writing part 24 size 20 to "cybertruckRealMeasuring_24.obj"
+writing part 25 size 20 to "cybertruckRealMeasuring_25.obj"
+writing part 26 size 20 to "cybertruckRealMeasuring_26.obj"
+writing part 27 size 20 to "cybertruckRealMeasuring_27.obj"
+writing part 28 size 20 to "cybertruckRealMeasuring_28.obj"
+writing part 29 size 1634 to "cybertruckRealMeasuring_29.obj"
+writing part 30 size 20 to "cybertruckRealMeasuring_30.obj"
+writing part 31 size 20 to "cybertruckRealMeasuring_31.obj"
+writing part 32 size 20 to "cybertruckRealMeasuring_32.obj"
+writing part 33 size 20 to "cybertruckRealMeasuring_33.obj"
+writing part 34 size 20 to "cybertruckRealMeasuring_34.obj"
+writing part 35 size 20 to "cybertruckRealMeasuring_35.obj"
+writing part 36 size 20 to "cybertruckRealMeasuring_36.obj"
+
+Number of zones (connected area with consistent normal) : 37
+More than one normal orientation.
+
+
+End
+
