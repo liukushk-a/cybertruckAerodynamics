@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# This is a blockMesh generation, a 4 processor in parallel snappyHexMesh with overwrite
+# This is a blockMesh generation, a 4 processor in parallel snappHexMesh with overwrite
 # process and a 4 processor in parallel foamRun
 
-blockMesh
+blockMesh >log.blockMesh
 
-decomposePar
+decomposePar >log.decomposePar
 
 mpirun -np 4 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
 
-reconstructPar
+reconstructPar >log.reconstructPar
 
-checkMesh >log.checkMesh 2>&1
+checkMesh >log.checkMesh
 
 mpirun -np 4 foamRun -parallel >log.foamRun 2>&1 &
 
