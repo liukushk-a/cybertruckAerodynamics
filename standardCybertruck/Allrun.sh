@@ -21,9 +21,9 @@ else
     exit 1
 fi
 
-mpirun -np 4 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
-
 echo "snappyHexMesh is running. This may take a while..."
+
+mpirun -np 4 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
 
 if grep -q "End" log.snappyHexMesh; then
     echo "snappyHexMesh completed successfully. ✅"
