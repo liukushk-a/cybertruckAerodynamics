@@ -23,6 +23,8 @@ fi
 
 mpirun -np 4 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
 
+echo "snappyHexMesh is running. This may take a while..."
+
 if grep -q "End" log.snappyHexMesh; then
     echo "snappyHexMesh completed successfully. ✅"
 else
@@ -50,6 +52,6 @@ fi
 
 mpirun -np 4 foamRun -parallel >log.foamRun 2>&1 &
 
-echo "foamRun is running in background. Monitor the process using Time output:"
+echo "foamRun is running. This may take a while... Monitor the process using Time output:"
 
 tail -f log.foamRun | egrep ^Time
