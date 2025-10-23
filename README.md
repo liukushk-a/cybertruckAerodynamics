@@ -1,3 +1,5 @@
-# cybertruckAerodynamics
-![Tesla Cybertruck](cyberPicture.jpeg)
-This is the analysis of the Tesla Cybertruck standard configuration aerodynamic properties on OpenFOAM 12 made by POLIMI students. The analysis will also include modified configurations of the vehicle.
+# WARNING
+
+This is the experimental branch. It's concept is to use it to study new features to implement in the latest/stable version of the code.
+
+It is recommended not to use this branch, but to rely on the main/master branch.
