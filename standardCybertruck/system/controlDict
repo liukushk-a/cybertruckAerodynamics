@@ -56,9 +56,7 @@ functions
         type    probes;
         lib    ("libsampling.so");
 
-        writeControl    timeStep;
-        writeInterval    1;
-        purgeWrite    1;
+        writeControl    writeTime;
 
         probeLocations
         (
@@ -85,9 +83,7 @@ functions
         type    surfaces;
         libs    ("libsampling.so");
 
-        writeControl    timeStep;
-        writeInterval    1;
-        purgeWrite    1;
+        writeControl    writeTime;
 
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
@@ -96,6 +92,15 @@ functions
 
         surfaces
         (
+            curPlane0
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (3.203475 0 0);
+                normal    (1 0 0);
+            }
+
             cutPlane1
             {
                 type    cutPlane;
@@ -187,7 +192,6 @@ functions
         libs    ("libforces.so");
 
         writeControl    timeStep;
-        writeInterval    1;
 
         log    yes;
         enabled    yes;
@@ -210,7 +214,6 @@ functions
         libs    ("libforces.so");
 
         writeControl    timeStep;
-        writeInterval    1;
 
         log    yes;
         enabled    yes;
