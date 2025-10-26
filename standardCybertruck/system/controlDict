@@ -17,7 +17,7 @@ application     foamRun;
 
 solver          incompressibleFluid;
 
-startFrom       startTime;
+startFrom       latestTime;
 
 startTime       0;
 
@@ -202,6 +202,36 @@ functions
         
         CofR    (0 0 0);
         pitchAxis    (1 0 0);
+    }
+
+    forceCoeffs
+    {
+        type    forceCoeffs;
+        libs    ("libforces.so");
+
+        writeControl    timeStep;
+        writeInterval    1;
+
+        log    yes;
+        enabled    yes;
+
+        patches
+        (
+            cybertruckRealMeasuring
+        );
+
+        rho    rhoInf;
+        rhoInf    1.225;
+
+        CofR    (0 0 0);
+        pitchAxis    (1 0 0);
+
+        liftDir    (0 0 1);
+        dragDir    (0 1 0);
+
+        magUInf    30;
+        lRef    5.683; // length of the truck
+        Aref    1.60; // frontal area
     }
 }
 

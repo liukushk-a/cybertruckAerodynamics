@@ -29,15 +29,6 @@ solvers
         relTol          0;
     }
 
-    U
-    {
-        solver          smoothSolver;
-        smoother        GaussSeidel;
-        tolerance       1e-8;
-        relTol          0.1;
-        nSweeps         1;
-    }
-
     "(U|k|epsilon|omega|f|v2)"
     {
         solver          smoothSolver;
