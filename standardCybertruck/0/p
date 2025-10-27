@@ -30,7 +30,7 @@ boundaryField
         freestreamValue          uniform 0;
     }
 
-    "(tarmac|cybertruckRealMeasuring)"
+    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
     {
         type            zeroGradient;
     }

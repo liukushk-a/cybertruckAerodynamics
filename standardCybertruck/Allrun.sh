@@ -50,6 +50,24 @@ else
     exit 1
 fi
 
+topoSet >log.topoSet
+
+if grep -q "End" log.topoSet; then
+    echo "topoSet completed successfully."
+else
+    echo "topoSet failed. Check log.topoSet for details."
+    exit 1
+fi
+
+setsToZones -noFlipMap >log.setsToZones
+
+if grep -q "End" log.setsToZones; then
+    echo "setsToZones completed successfully."
+else
+    echo "setsToZones failed. Check log.setsToZones for details."
+    exit 1
+fi
+
 paraFoam -touch
 
 decomposePar >log.decomposePar

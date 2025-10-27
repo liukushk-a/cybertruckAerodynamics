@@ -30,7 +30,7 @@ boundaryField
     {
         type            zeroGradient;
     }
-    "(tarmac|cybertruckRealMeasuring)"
+    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
     {
         type            kqRWallFunction;
         value           uniform 0.375;

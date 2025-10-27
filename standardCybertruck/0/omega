@@ -31,7 +31,7 @@ boundaryField
         type            zeroGradient;
     }
 
-    "(tarmac|cybertruckRealMeasuring)"
+    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
     {
         type            omegaWallFunction;
         value           $internalField;
