@@ -1,1 +1,1 @@
-TODO: MRF, force postProcessing, add of planes for postProcessing, grid review, SIMPLE review.
+TODO: Grid review, SIMPLE review, geometry mods, conferm placing of force and force coefficients market.
