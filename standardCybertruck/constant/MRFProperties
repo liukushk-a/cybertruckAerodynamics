@@ -22,7 +22,7 @@ MRF1
     nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
 
     origin      (2.20515 -3.241555 0.729127);
-    axis        (0 0 1);
+    axis        (1 0 0);
 
     rpm         67.887126;
 }
@@ -35,7 +35,7 @@ MRF2
     nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
 
     origin      (2.20515 0.4327766 0.729127);
-    axis        (0 0 1);
+    axis        (1 0 0);
 
     rpm         67.887126;
 }
