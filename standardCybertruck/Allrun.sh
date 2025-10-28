@@ -75,7 +75,7 @@ decomposePar >log.decomposePar
 if grep -q "End" log.decomposePar; then
     echo "decomposePar completed successfully."
 else
-    echo "decomposePar failed. Check log.checkMesh for details."
+    echo "decomposePar failed. Check log.decomposePar for details."
     exit 1
 fi
 
