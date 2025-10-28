@@ -92,7 +92,7 @@ functions
 
         surfaces
         (
-            curPlane0
+            cutPlane01
             {
                 type   cutPlane;
                 interpolate    true;
@@ -101,6 +101,15 @@ functions
                 normal    (1 0 0);
             }
 
+            cutPlane02
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (2.375 0 0);
+                normal    (1 0 0);
+            }
+            
             cutPlane1
             {
                 type    cutPlane;
@@ -198,7 +207,7 @@ functions
 
         patches
         (
-            cybertruckRealMeasuring
+            bodywork
         );
 
         rho    rhoInf;
@@ -220,7 +229,7 @@ functions
 
         patches
         (
-            cybertruckRealMeasuring
+            bodywork
         );
 
         rho    rhoInf;

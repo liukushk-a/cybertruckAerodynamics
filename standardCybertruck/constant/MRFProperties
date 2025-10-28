@@ -16,7 +16,7 @@ FoamFile
 
 MRF1
 {
-    cellZone    movingCellsFrontRightTyreBlender;
+    cellZone    movingCellsFrontTyreBlender;
 
     // Fixed patches (by default they 'move' with the MRF zone)
     nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
@@ -29,7 +29,7 @@ MRF1
 
 MRF2
 {
-    cellZone    movingCellsRearRightTyreBlender;
+    cellZone    movingCellsRearTyreBlender;
 
     // Fixed patches (by default they 'move' with the MRF zone)
     nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
