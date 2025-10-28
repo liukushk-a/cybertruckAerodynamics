@@ -17,7 +17,7 @@ application     foamRun;
 
 solver          incompressibleFluid;
 
-startFrom       startTime;
+startFrom       latestTime;
 
 startTime       0;
 
@@ -47,7 +47,204 @@ runTimeModifiable true;
 
 functions
 {
-    # includeFunc residuals(U, p, k, epsilon);
+    // residuals
+    # includeFunc residuals(U, p, k, omega);
+    
+    // probes in the wake
+    probes
+    {
+        type    probes;
+        lib    ("libsampling.so");
+
+        writeControl    writeTime;
+
+        probeLocations
+        (
+            (3.203475 1.55 1.5)
+            (3.203475 1.6 1.5)
+            (3.203475 1.7 1.5)
+            (3.203475 1.8 1.5)
+            (3.203475 1.9 1.5)
+            (3.203475 2 1.5)
+            (3.203475 2.5 1.5)
+            (3.203475 3 1.5)
+            (3.203475 4 1.5)
+            (3.203475 5 1.5)
+            (3.203475 8 1.5)
+            (3.203475 12 1.5)
+        );
+
+        fields (p U k omega);
+    }
+
+    // cutting planes in the wake
+    slices
+    {
+        type    surfaces;
+        libs    ("libsampling.so");
+
+        writeControl    writeTime;
+
+        surfaceFormat    vtk;
+        interpolationScheme    cellPoint;
+
+        fields (p U k omega);
+
+        surfaces
+        (
+            cutPlane01
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (3.203475 0 0);
+                normal    (1 0 0);
+            }
+
+            cutPlane02
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (2.375 0 0);
+                normal    (1 0 0);
+            }
+            
+            cutPlane1
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (0 -3.5 0);
+                normal    (0 1 0);
+            }
+
+            cutPlane2
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (0 -1.5 0);
+                normal    (0 1 0);
+            }
+
+            cutPlane3
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 0 0);
+            }
+
+            cutPlane4
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 1 0);
+            }
+
+            cutPlane5
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 1.55 0);
+            }
+
+            cutPlane6
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 3 0);
+            }
+            cutPlane7
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 5 0);
+            }
+            cutPlane8
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 9 0);
+            }
+
+            cutPlane9
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 1 0);
+                point    (0 12 0);
+            }
+        );
+    }
+
+    // Q criterion and vorticity
+    #includeFunc Q
+    #includeFunc vorticity
+
+    force
+    {
+        type    forces;
+        libs    ("libforces.so");
+
+        writeControl    timeStep;
+
+        log    yes;
+        enabled    yes;
+
+        patches
+        (
+            bodywork
+        );
+
+        rho    rhoInf;
+        rhoInf    1.225;
+        
+        CofR    (0 0 0);
+        pitchAxis    (1 0 0);
+    }
+
+    forceCoeffs
+    {
+        type    forceCoeffs;
+        libs    ("libforces.so");
+
+        writeControl    timeStep;
+
+        log    yes;
+        enabled    yes;
+
+        patches
+        (
+            bodywork
+        );
+
+        rho    rhoInf;
+        rhoInf    1.225;
+
+        CofR    (0 0 0);
+        pitchAxis    (1 0 0);
+
+        liftDir    (0 0 1);
+        dragDir    (0 1 0);
+
+        magUInf    30;
+        lRef    5.683; // length of the truck
+        Aref    1.60; // frontal area
+    }
 }
 
 // ************************************************************************* //

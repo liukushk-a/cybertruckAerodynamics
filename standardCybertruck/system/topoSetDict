@@ -1,0 +1,44 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    {
+        name    movingCellsRearTyreBlender;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1 (2.20515 0.4327766 0.729127);
+            p2 (2.53463 0.4327766 0.729127);
+            radius 0.44191;
+        }
+    }
+    {
+        name    movingCellsFrontTyreBlender;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1 (2.20515 -3.241555 0.729127);
+            p2 (2.53463 -3.241555 0.729127);
+            radius 0.44191;
+        }
+    }
+);
+
+// ************************************************************************* //

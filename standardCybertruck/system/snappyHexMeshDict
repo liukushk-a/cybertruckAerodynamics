@@ -27,12 +27,24 @@ addLayers       true;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    cybertruckRealMeasuring
+    bodywork
     {
         type triSurfaceMesh;
-        file "cybertruckRealMeasuring.stl";
+        file "bodywork.stl";
     }
 
+    frontRightTyreBlender
+    {
+        type triSurfaceMesh;
+        file "frontRightTyreBlender.stl";
+    }
+
+    rearRightTyreBlender
+    {
+        type triSurfaceMesh;
+        file "rearRightTyreBlender.stl";
+    }
+    
     refinementBox
     {
         type searchableBox;
@@ -53,14 +65,14 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 100000;
+    maxLocalCells 1250000;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
     // Note that this is the number of cells before removing the part which
     // is not 'visible' from the keepPoint. The final number of cells might
     // actually be a lot less.
-    maxGlobalCells 3250000;
+    maxGlobalCells 4500000;
 
     // The surface refinement loop might spend lots of iterations refining just a
     // few cells. This setting will cause refinement to stop if <= minimumRefine
@@ -108,10 +120,36 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        cybertruckRealMeasuring
+        bodywork
         {
            // Surface-wise min and max refinement level
-            level (2 8);
+            level (4 8);
+
+            // Optional specification of patch type (default is wall). No
+            // constraint types (cyclic, symmetry) etc. are allowed.
+            patchInfo
+            {
+                type wall;
+            }
+        }
+
+        frontRightTyreBlender
+        {
+           // Surface-wise min and max refinement level
+            level (5 8);
+
+            // Optional specification of patch type (default is wall). No
+            // constraint types (cyclic, symmetry) etc. are allowed.
+            patchInfo
+            {
+                type wall;
+            }
+        }
+
+        rearRightTyreBlender
+        {
+           // Surface-wise min and max refinement level
+            level (5 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -144,7 +182,7 @@ castellatedMeshControls
         refinementBox
         {
             mode    inside;
-            level   5;
+            level   7;
         }
     }
 
@@ -216,7 +254,7 @@ addLayersControls
     // Per final patch (so not geometry!) the layer information
     layers
     {
-        "(tarmac|cybertruckRealMeasuring).*"
+        "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender).*"
         {
             nSurfaceLayers 8;
         }

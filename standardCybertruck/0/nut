@@ -32,7 +32,7 @@ boundaryField
         value           uniform 0;
     }
 
-    "(tarmac|cybertruckRealMeasuring)"
+    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
     {
         type            nutkWallFunction;
         value           uniform 0;

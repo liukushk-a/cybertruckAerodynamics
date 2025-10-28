@@ -32,9 +32,27 @@ boundaryField
         type            zeroGradient;
     }
 
-    cybertruckRealMeasuring
+    bodywork
     {
         type            noSlip;
+    }
+
+    frontRightTyreBlender
+    {
+        type            rotatingWallVelocity;
+        origin          (2.20515 -3.241555 0.729127);
+        axis            (0 0 1);
+        omega           67.887126;
+        value           uniform (0 0 0);
+    }
+
+    rearRightTyreBlender
+    {
+        type            rotatingWallVelocity;
+        origin          (2.20515 0.4327766 0.729127);
+        axis            (0 0 1);
+        omega           67.887126;
+        value           uniform (0 0 0);
     }
 
     tarmac
