@@ -70,6 +70,13 @@ fi
 
 paraFoam -touch
 
+# NOTE: there is a bug in OpenFOAM and this bug does not split cellZones
+# into different processors if you already have processor folders, so to
+# avoid it, remove processor folders and create new, you cannot overwrite
+# them
+
+rm -rf processor*
+
 decomposePar >log.decomposePar
 
 if grep -q "End" log.decomposePar; then
