@@ -1,1 +1,1 @@
-TODO: Grid review, SIMPLE review, geometry mods, conferm placing of force and force coefficients market.
+TODO: Grid review (try unstructured mesh, adjust boundary layer for y+ = 1, enlarge box in y, adjust refinement boxe dimensions), SIMPLE review, geometry mods, confirm placing of force and force coefficients market.
