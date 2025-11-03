@@ -88,7 +88,7 @@ functions
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega);
+        fields (p U k omega yPlus);
 
         surfaces
         (
@@ -244,6 +244,14 @@ functions
         magUInf    30;
         lRef    5.683; // length of the truck
         Aref    1.60; // frontal area
+    }
+
+    yplus
+    {
+        type    yPlus;
+        libs    ("libfieldFunctionObjects.so");
+
+        writeControl    writeTime;
     }
 }
 
