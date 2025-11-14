@@ -1,0 +1,231 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     foamRun;
+
+solver          incompressibleFluid;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         5000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   20;
+
+purgeWrite      1;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    // residuals
+    # includeFunc residuals(U, p, k, omega);
+   
+    // cutting planes in the wake
+    slices
+    {
+        type    surfaces;
+        libs    ("libsampling.so");
+
+        writeControl    writeTime;
+
+        surfaceFormat    vtk;
+        interpolationScheme    cellPoint;
+
+        fields (p U k omega yPlus);
+
+        surfaces
+        (
+            cutPlane01
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (0 -0.001 0);
+                normal    (0 1 0);
+            }
+
+            cutPlane02
+            {
+                type   cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (0 -0.835 0);
+                normal    (0 1 0);
+            }
+            
+            cutPlane1
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (2 0 0);
+                normal    (1 0 0);
+            }
+
+            cutPlane2
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                point    (0 0 0);
+                normal    (1 0 0);
+            }
+
+            cutPlane3
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-2 0 0);
+            }
+
+            cutPlane4
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-3 0 0);
+            }
+
+            cutPlane5
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-4 0 0);
+            }
+
+            cutPlane6
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-6 0 0);
+            }
+            cutPlane7
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-10 0 0);
+            }
+            cutPlane8
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-14 0 0);
+            }
+
+            cutPlane9
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (1 0 0);
+                point    (-20 0 0);
+            }
+        );
+    }
+
+    // Q criterion and vorticity
+    #includeFunc Q
+    #includeFunc vorticity
+
+    force
+    {
+        type    forces;
+        libs    ("libforces.so");
+
+        writeControl    timeStep;
+
+        log    yes;
+        enabled    yes;
+
+        patches
+        (
+            bodyRoofRack_mm
+        );
+
+        rho    rhoInf;
+        rhoInf    1.225;
+        
+        CofR    (0 0 0);
+        pitchAxis    (0 1 0);
+    }
+
+    forceCoeffs
+    {
+        type    forceCoeffs;
+        libs    ("libforces.so");
+
+        writeControl    timeStep;
+
+        log    yes;
+        enabled    yes;
+
+        patches
+        (
+            bodyRoofRack_mm
+        );
+
+        rho    rhoInf;
+        rhoInf    1.225;
+
+        CofR    (0 0 0);
+        pitchAxis    (0 1 0);
+
+        liftDir    (0 0 1);
+        dragDir    (-1 0 0);
+
+        magUInf    30;
+        lRef    5.683; // length of the truck
+        Aref    1.60; // frontal area
+    }
+
+    yplus
+    {
+        type    yPlus;
+        libs    ("libfieldFunctionObjects.so");
+
+        writeControl    writeTime;
+    }
+}
+
+// ************************************************************************* //

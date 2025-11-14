@@ -1,0 +1,76 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 13-283650f815b4
+Exec   : blockMesh
+Date   : Nov 14 2025
+Time   : 11:14:05
+Host   : "fd826b27582a"
+PID    : 249
+I/O    : uncollated
+Case   : /home/student/OpenFOAM/student-12/run/standardCybertruck/roofRackCybertruck
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading "blockMeshDict"
+
+Creating block mesh from
+    "system/blockMeshDict"
+No non-linear block edges defined
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Creating block mesh topology
+
+Basic statistics
+    Number of internal faces : 0
+    Number of boundary faces : 6
+    Number of defined boundary faces : 6
+    Number of undefined boundary faces : 0
+
+Checking topology
+Creating block offsets
+Creating merge list .
+
+Creating polyMesh from blockMesh
+Creating patches
+Creating cells
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.5 .. 0.5
+        j : 0.5
+        k : 0.493659 .. 0.493659
+
+No patch pairs to merge
+
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (-40 -8 -0.860503) (20 0 10)
+  nPoints: 47311
+  nCells: 42240
+  nFaces: 131632
+  nInternalFaces: 121808
+----------------
+Patches
+----------------
+  patch 0 (start: 121808 size: 1920) name: tarmac
+  patch 1 (start: 123728 size: 1920) name: upperArea
+  patch 2 (start: 125648 size: 352) name: inlet
+  patch 3 (start: 126000 size: 352) name: outlet
+  patch 4 (start: 126352 size: 2640) name: lateralArea
+  patch 5 (start: 128992 size: 2640) name: symmetryPlane
+
+End
+

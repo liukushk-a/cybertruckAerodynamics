@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+UInlet            (-30 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform $UInlet;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    bodyRoofRack_mm
+    {
+        type            noSlip;
+    }
+
+    FR_mm
+    {
+        type            rotatingWallVelocity;
+        origin          (1.948045 -1.00115  -0.428600);
+        axis            (0 1 0);
+        omega           67.887126;
+        value           uniform (0 0 0);
+    }
+
+    RR_mm
+    {
+        type            rotatingWallVelocity;
+        origin          (-1.726285 -1.00115  -0.428600);
+        axis            (0 1 0);
+        omega           67.887126;
+        value           uniform (0 0 0);
+    }
+
+    tarmac
+    {
+        type            slip;
+    }
+
+    "(upperArea|lateralArea)"
+    {
+        type            freestreamVelocity;
+        freestreamValue    uniform $UInlet;
+    }
+
+    symmetryPlane
+    {
+        type            symmetry;
+    }
+}
+
+// ************************************************************************* //
