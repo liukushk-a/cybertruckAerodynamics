@@ -12,7 +12,9 @@ else
     exit 1
 fi
 
-decomposePar >log.decomposePar
+paraFoam -touch
+
+mpirun -np 6 decomposePar >log.decomposePar
 
 if grep -q "End" log.decomposePar; then
     echo "decomposePar completed successfully."
@@ -23,7 +25,7 @@ fi
 
 echo "snappyHexMesh is running. This may take a while..."
 
-mpirun -np 4 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
+mpirun -np 6 snappyHexMesh -overwrite -parallel >log.snappyHexMesh 2>&1
 
 if grep -q "End" log.snappyHexMesh; then
     echo "snappyHexMesh completed successfully."
@@ -68,8 +70,6 @@ else
     exit 1
 fi
 
-paraFoam -touch
-
 # NOTE: there is a bug in OpenFOAM and this bug does not split cellZones
 # into different processors if you already have processor folders, so to
 # avoid it, remove processor folders and create new, you cannot overwrite
@@ -86,7 +86,7 @@ else
     exit 1
 fi
 
-mpirun -np 4 foamRun -parallel >log.foamRun 2>&1 &
+mpirun -np 6 foamRun -parallel >log.foamRun 2>&1 &
 
 echo "foamRun is running. This may take a while... Monitor the process using Time output:"
 

@@ -30,6 +30,9 @@ boundaryField
     outlet
     {
         type            zeroGradient;
+        //type            inletOutlet;
+        //value            uniform $UInlet;
+        //inletValue        uniform $UInlet;
     }
 
     bodyCassoneAperto_mm
@@ -62,8 +65,9 @@ boundaryField
 
     "(upperArea|lateralArea)"
     {
-        type            freestreamVelocity;
-        freestreamValue    uniform $UInlet;
+        //type            freestreamVelocity;
+        //freestreamValue    uniform $UInlet;
+        type            slip;
     }
 
     symmetryPlane

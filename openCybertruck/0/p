@@ -24,11 +24,17 @@ boundaryField
         type            zeroGradient;
     }
 
-    "(outlet|upperArea|lateralArea)"
+    outlet
     {
-        //type            freestreamPressure;
+        type            fixedValue;
+        //type            fixedValue;
+        value           uniform 0;
+    }
+
+    "(upperArea|lateralArea)"
+    {
         type                     zeroGradient;
-        //freestreamValue          uniform 0;
+        //type                       slip;
     }
 
     "(tarmac|bodyCassoneAperto_mm|FR_mm|RR_mm)"

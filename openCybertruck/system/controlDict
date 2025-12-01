@@ -17,7 +17,7 @@ application     foamRun;
 
 solver          incompressibleFluid;
 
-startFrom       latestTime;
+startFrom       startTime;
 
 startTime       0;
 
@@ -49,7 +49,21 @@ functions
 {
     // residuals
     # includeFunc residuals(U, p, k, omega);
-   
+    
+    // Q criterion
+    # includeFunc Q
+    
+    // Vorticity
+    # includeFunc vorticity
+    
+    yPlus
+    {
+        type    yPlus;
+        libs    ("libfieldFunctionObjects.so");
+
+        writeControl    writeTime;
+    }
+
     // cutting planes in the wake
     slices
     {
@@ -61,7 +75,7 @@ functions
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega yPlus);
+        fields (p U k omega yPlus Q);
 
         surfaces
         (
@@ -161,12 +175,17 @@ functions
                 normal    (1 0 0);
                 point    (-20 0 0);
             }
+            
+            cutPlane001
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 0 1);
+                point    (0 0 0.2);
+            }
         );
     }
-
-    // Q criterion and vorticity
-    #includeFunc Q
-    #includeFunc vorticity
 
     force
     {
@@ -219,13 +238,6 @@ functions
         Aref    1.60; // frontal area
     }
 
-    yplus
-    {
-        type    yPlus;
-        libs    ("libfieldFunctionObjects.so");
-
-        writeControl    writeTime;
-    }
 }
 
 // ************************************************************************* //

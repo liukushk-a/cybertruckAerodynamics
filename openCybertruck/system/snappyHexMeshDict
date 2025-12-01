@@ -36,26 +36,48 @@ geometry
     FR_mm
     {
         type triSurfaceMesh;
-        file "FR.stl";
+        file "FR_mm.stl";
     }
 
     RR_mm
     {
         type triSurfaceMesh;
-        file "RR.stl";
+        file "RR_mm.stl";
     }
     
     refinementBox1
     {
         type searchableBox;
-        min(-20 -3 -0.860503);
-        max(7 0 4);
+        min (-100 -5 -0.86050);
+        max (8 0 10);
     }
+    
     refinementBox2
     {
         type searchableBox;
-        min(-10 -1.75 -0.860503);
-        max(4 0 2.5);
+        min (-80 -5 -0.86050);
+        max (7 0 8);
+    }
+    
+    refinementBox3
+    {
+        type searchableBox;
+        min (-50 -4 -0.86050);
+        max (6 0 6);
+    }
+    
+    refinementBox4
+    {
+        type searchableBox;
+        min (-30 -3 -0.86050);
+        max (5 0 4);
+    }
+    
+    refinementBox5
+    {
+        type searchableBox;
+        min (-10 -2 -0.86050);
+        max (4 0 3);
     }
 };
 
@@ -71,14 +93,14 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 1250000;
+    maxLocalCells 3000000;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
     // Note that this is the number of cells before removing the part which
     // is not 'visible' from the keepPoint. The final number of cells might
     // actually be a lot less.
-    maxGlobalCells 5000000;
+    maxGlobalCells 12000000;
 
     // The surface refinement loop might spend lots of iterations refining just a
     // few cells. This setting will cause refinement to stop if <= minimumRefine
@@ -129,7 +151,7 @@ castellatedMeshControls
         bodyCassoneAperto_mm
         {
            // Surface-wise min and max refinement level
-            level (4 8);
+            level (6 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -142,7 +164,7 @@ castellatedMeshControls
         FR_mm
         {
            // Surface-wise min and max refinement level
-            level (5 8);
+            level (7 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -155,7 +177,7 @@ castellatedMeshControls
         RR_mm
         {
            // Surface-wise min and max refinement level
-            level (5 8);
+            level (7 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -188,12 +210,31 @@ castellatedMeshControls
         refinementBox1
         {
             mode    inside;
-            level   ((1e15 2));
+            levels   ((1E15 1));
         }
+        
         refinementBox2
         {
             mode    inside;
-            level   ((1e15 4));
+            levels   ((1E15 2));
+        }
+        
+        refinementBox3
+        {
+            mode    inside;
+            levels   ((1E15 3));
+        }
+
+        refinementBox4
+        {
+            mode    inside;
+            levels   ((1E15 4));
+        }
+        
+        refinementBox5
+        {
+            mode    inside;
+            levels   ((1E15 5));
         }
     }
 
@@ -278,7 +319,7 @@ addLayersControls
     // is the thickness of the layer furthest away from the wall.
     // Relative to undistorted size of cell outside layer.
     // See relativeSizes parameter.
-    finalLayerThickness 0.2;
+    finalLayerThickness 0.15;
 
     // Minimum thickness of cell layer. If for any reason layer
     // cannot be above minThickness do not add layer.
