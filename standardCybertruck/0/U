@@ -17,7 +17,7 @@ dimensions      [0 1 -1 0 0 0 0];
 
 internalField   uniform (0 0 0);
 
-UInlet            (0 30 0);
+UInlet            (-30 0 0);
 
 boundaryField
 {
@@ -30,40 +30,45 @@ boundaryField
     outlet
     {
         type            zeroGradient;
+        //type            inletOutlet;
+        //value            uniform $UInlet;
+        //inletValue        uniform $UInlet;
     }
 
-    bodywork
+    bodyCassoneChiuso_mm
     {
         type            noSlip;
     }
 
-    frontRightTyreBlender
+    FR_mm
     {
-        type            rotatingWallVelocity;
-        origin          (2.20515 -3.241555 0.729127);
-        axis            (1 0 0);
+        type            movingWallVelocity;
+        origin          (1.948045 -1.00115  -0.428600);
+        axis            (0 1 0);
         omega           67.887126;
         value           uniform (0 0 0);
     }
 
-    rearRightTyreBlender
+    RR_mm
     {
-        type            rotatingWallVelocity;
-        origin          (2.20515 0.4327766 0.729127);
-        axis            (1 0 0);
+        type            movingWallVelocity;
+        origin          (-1.726285 -1.00115  -0.428600);
+        axis            (0 1 0);
         omega           67.887126;
         value           uniform (0 0 0);
     }
 
     tarmac
     {
-        type            slip;
+        type            fixedValue;
+        value           uniform $UInlet;
     }
 
     "(upperArea|lateralArea)"
     {
-        type            freestreamVelocity;
-        freestreamValue    uniform $UInlet;
+        type            fixedValue;
+        value           uniform $UInlet;
+        //type            slip;
     }
 
     symmetryPlane

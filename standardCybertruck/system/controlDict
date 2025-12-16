@@ -50,31 +50,18 @@ functions
     // residuals
     # includeFunc residuals(U, p, k, omega);
     
-    // probes in the wake
-    probes
+    // Q criterion
+    # includeFunc Q
+    
+    // Vorticity
+    # includeFunc vorticity
+    
+    yPlus
     {
-        type    probes;
-        lib    ("libsampling.so");
+        type    yPlus;
+        libs    ("libfieldFunctionObjects.so");
 
         writeControl    writeTime;
-
-        probeLocations
-        (
-            (3.203475 1.55 1.5)
-            (3.203475 1.6 1.5)
-            (3.203475 1.7 1.5)
-            (3.203475 1.8 1.5)
-            (3.203475 1.9 1.5)
-            (3.203475 2 1.5)
-            (3.203475 2.5 1.5)
-            (3.203475 3 1.5)
-            (3.203475 4 1.5)
-            (3.203475 5 1.5)
-            (3.203475 8 1.5)
-            (3.203475 12 1.5)
-        );
-
-        fields (p U k omega);
     }
 
     // cutting planes in the wake
@@ -88,7 +75,7 @@ functions
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega yPlus);
+        fields (p U k omega yPlus Q);
 
         surfaces
         (
@@ -97,8 +84,8 @@ functions
                 type   cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                point    (3.20346 0 0);
-                normal    (1 0 0);
+                point    (0 -0.001 0);
+                normal    (0 1 0);
             }
 
             cutPlane02
@@ -106,8 +93,8 @@ functions
                 type   cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                point    (2.375 0 0);
-                normal    (1 0 0);
+                point    (0 -0.835 0);
+                normal    (0 1 0);
             }
             
             cutPlane1
@@ -115,8 +102,8 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                point    (0 -3.5 0);
-                normal    (0 1 0);
+                point    (2 0 0);
+                normal    (1 0 0);
             }
 
             cutPlane2
@@ -124,8 +111,8 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                point    (0 -1.5 0);
-                normal    (0 1 0);
+                point    (0 0 0);
+                normal    (1 0 0);
             }
 
             cutPlane3
@@ -133,8 +120,8 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 0 0);
+                normal    (1 0 0);
+                point    (-2 0 0);
             }
 
             cutPlane4
@@ -142,8 +129,8 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 1 0);
+                normal    (1 0 0);
+                point    (-3 0 0);
             }
 
             cutPlane5
@@ -151,8 +138,8 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 1.55 0);
+                normal    (1 0 0);
+                point    (-4 0 0);
             }
 
             cutPlane6
@@ -160,24 +147,24 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 3 0);
+                normal    (1 0 0);
+                point    (-6 0 0);
             }
             cutPlane7
             {
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 5 0);
+                normal    (1 0 0);
+                point    (-10 0 0);
             }
             cutPlane8
             {
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 9 0);
+                normal    (1 0 0);
+                point    (-14 0 0);
             }
 
             cutPlane9
@@ -185,15 +172,20 @@ functions
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
-                normal    (0 1 0);
-                point    (0 12 0);
+                normal    (1 0 0);
+                point    (-20 0 0);
+            }
+            
+            cutPlane001
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 0 1);
+                point    (0 0 0.2);
             }
         );
     }
-
-    // Q criterion and vorticity
-    #includeFunc Q
-    #includeFunc vorticity
 
     force
     {
@@ -207,14 +199,14 @@ functions
 
         patches
         (
-            bodywork
+            bodyCassoneChiuso_mm
         );
 
         rho    rhoInf;
         rhoInf    1.225;
         
         CofR    (0 0 0);
-        pitchAxis    (1 0 0);
+        pitchAxis    (0 1 0);
     }
 
     forceCoeffs
@@ -229,30 +221,23 @@ functions
 
         patches
         (
-            bodywork
+            bodyCassoneChiuso_mm
         );
 
         rho    rhoInf;
         rhoInf    1.225;
 
         CofR    (0 0 0);
-        pitchAxis    (1 0 0);
+        pitchAxis    (0 1 0);
 
         liftDir    (0 0 1);
-        dragDir    (0 1 0);
+        dragDir    (-1 0 0);
 
         magUInf    30;
         lRef    5.683; // length of the truck
         Aref    1.60; // frontal area
     }
 
-    yplus
-    {
-        type    yPlus;
-        libs    ("libfieldFunctionObjects.so");
-
-        writeControl    writeTime;
-    }
 }
 
 // ************************************************************************* //

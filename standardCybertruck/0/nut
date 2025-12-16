@@ -32,7 +32,7 @@ boundaryField
         value           uniform 0;
     }
 
-    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
+    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
     {
         type            nutkWallFunction;
         value           uniform 0;

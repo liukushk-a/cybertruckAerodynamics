@@ -27,29 +27,50 @@ addLayers       true;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    bodywork
+    bodyCassoneChiuso_mm
     {
         type triSurfaceMesh;
-        file "bodywork.stl";
+        file "bodyCassoneChiuso_mm.stl";
     }
 
-    frontRightTyreBlender
+    FR_mm
     {
         type triSurfaceMesh;
-        file "frontRightTyreBlender.stl";
+        file "FR_mm.stl";
     }
 
-    rearRightTyreBlender
+    RR_mm
     {
         type triSurfaceMesh;
-        file "rearRightTyreBlender.stl";
+        file "RR_mm.stl";
     }
     
-    refinementBox
+    refinementBox1
     {
         type searchableBox;
-        min (2 -4.5 0.28723);
-        max (3.20347 25 3.5);
+        min (-100 -5 -0.86050);
+        max (8 0 12);
+    }
+    
+    refinementBox2
+    {
+        type searchableBox;
+        min (-80 -5 -0.86050);
+        max (7 0 9);
+    }
+    
+    refinementBox3
+    {
+        type searchableBox;
+        min (-50 -4 -0.86050);
+        max (6 0 5);
+    }
+    
+    refinementBox4
+    {
+        type searchableBox;
+        min (-30 -3 -0.86050);
+        max (5 0 3);
     }
 };
 
@@ -65,14 +86,14 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 1250000;
+    maxLocalCells 2333333;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
     // Note that this is the number of cells before removing the part which
     // is not 'visible' from the keepPoint. The final number of cells might
     // actually be a lot less.
-    maxGlobalCells 5000000;
+    maxGlobalCells 14000000;
 
     // The surface refinement loop might spend lots of iterations refining just a
     // few cells. This setting will cause refinement to stop if <= minimumRefine
@@ -90,27 +111,7 @@ castellatedMeshControls
     // Number of buffer layers between different levels.
     // 1 means normal 2:1 refinement restriction, larger means slower
     // refinement.
-    nCellsBetweenLevels 3;
-
-
-
-    // Explicit feature edge refinement
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    // Specifies a level for any cell intersected by its edges.
-    // This is a featureEdgeMesh, read from constant/geometry for now.
-   // features
-   // (
-   //     {
-   //         file "cybertruckRealMeasuring.eMesh";
-   //         level 5;
-   //     }
-   // );
-
-
-
-    // Surface based refinement
-    // ~~~~~~~~~~~~~~~~~~~~~~~~
+    nCellsBetweenLevels 1;
 
     // Specifies two levels for every surface. The first is the minimum level,
     // every cell intersecting a surface gets refined up to the minimum level.
@@ -120,10 +121,10 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        bodywork
+        bodyCassoneChiuso_mm
         {
            // Surface-wise min and max refinement level
-            level (4 8);
+            level (6 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -133,10 +134,10 @@ castellatedMeshControls
             }
         }
 
-        frontRightTyreBlender
+        FR_mm
         {
            // Surface-wise min and max refinement level
-            level (5 8);
+            level (7 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -146,10 +147,10 @@ castellatedMeshControls
             }
         }
 
-        rearRightTyreBlender
+        RR_mm
         {
            // Surface-wise min and max refinement level
-            level (5 8);
+            level (7 8);
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -179,10 +180,28 @@ castellatedMeshControls
 
     refinementRegions
     {
-        refinementBox
+        refinementBox1
         {
             mode    inside;
-            level   7;
+            levels   ((1E15 1));
+        }
+        
+        refinementBox2
+        {
+            mode    inside;
+            levels   ((1E15 2));
+        }
+        
+        refinementBox3
+        {
+            mode    inside;
+            levels   ((1E15 3));
+        }
+
+        refinementBox4
+        {
+            mode    inside;
+            levels   ((1E15 4));
         }
     }
 
@@ -195,7 +214,7 @@ castellatedMeshControls
     // section reachable from the insidePoint is kept.
     // NOTE: This point should never be on a face, always inside a cell, even
     // after refinement.
-    insidePoint (-3 -6 3);
+    insidePoint (10 -2 1);
 
 
     // Whether any faceZones (as specified in the refinementSurfaces)
@@ -254,20 +273,20 @@ addLayersControls
     // Per final patch (so not geometry!) the layer information
     layers
     {
-        "(bodywork|frontRightTyreBlender|rearRightTyreBlender).*"
+        "(bodyCassoneChiuso_mm|FR_mm|RR_mm).*"
         {
-            nSurfaceLayers 5;
+            nSurfaceLayers 4;
         }
     }
 
     // Expansion factor for layer mesh
-    expansionRatio 1.3;
+    expansionRatio 1.4;
 
     // Wanted thickness of final added cell layer. If multiple layers
     // is the thickness of the layer furthest away from the wall.
     // Relative to undistorted size of cell outside layer.
     // See relativeSizes parameter.
-    finalLayerThickness 0.2;
+    finalLayerThickness 0.15;
 
     // Minimum thickness of cell layer. If for any reason layer
     // cannot be above minThickness do not add layer.

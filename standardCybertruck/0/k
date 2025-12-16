@@ -16,7 +16,7 @@ FoamFile
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.375;
+internalField   uniform 0.00116;
 
 boundaryField
 {
@@ -30,7 +30,7 @@ boundaryField
     {
         type            zeroGradient;
     }
-    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
+    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
     {
         type            kqRWallFunction;
         value           uniform 0.375;

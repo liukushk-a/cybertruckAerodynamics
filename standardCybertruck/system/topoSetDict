@@ -16,26 +16,26 @@ FoamFile
 actions
 (
     {
-        name    movingCellsRearTyreBlender;
+        name    movingRR;
         type    cellSet;
         action  new;
         source  cylinderToCell;
         sourceInfo
         {
-            p1 (2.20515 0.4327766 0.729127);
-            p2 (2.53463 0.4327766 0.729127);
+            p1 (-1.726285 -1.00115  -0.428600);
+            p2 (-1.726285 -0.671665 -0.428600);
             radius 0.44191;
         }
     }
     {
-        name    movingCellsFrontTyreBlender;
+        name    movingFR;
         type    cellSet;
         action  new;
         source  cylinderToCell;
         sourceInfo
         {
-            p1 (2.20515 -3.241555 0.729127);
-            p2 (2.53463 -3.241555 0.729127);
+            p1 (1.948045 -1.00115  -0.428600);
+            p2 (1.948045 -0.671665 -0.428600);
             radius 0.44191;
         }
     }

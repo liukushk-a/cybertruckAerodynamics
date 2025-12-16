@@ -24,13 +24,20 @@ boundaryField
         type            zeroGradient;
     }
 
-    "(outlet|upperArea|lateralArea)"
+    outlet
     {
-        type            freestreamPressure;
-        freestreamValue          uniform 0;
+        type            fixedValue;
+        //type            fixedValue;
+        value           uniform 0;
     }
 
-    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
+    "(upperArea|lateralArea)"
+    {
+        type                     zeroGradient;
+        //type                       slip;
+    }
+
+    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
     {
         type            zeroGradient;
     }
