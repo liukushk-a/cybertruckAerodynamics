@@ -22,9 +22,8 @@ boundaryField
 {
     inlet
     {
-        type            turbulentIntensityKineticEnergyInlet;
-        intensity       0.05;
-        value           uniform 0.375;
+        type            fixedValue;
+        value           $internalField;
     }
     "(outlet|upperArea|lateralArea)"
     {
@@ -33,7 +32,7 @@ boundaryField
     "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
     {
         type            kqRWallFunction;
-        value           uniform 0.375;
+        value           $internalField;
     }
 
     symmetryPlane
@@ -41,6 +40,5 @@ boundaryField
         type            symmetry;
     }
 }
-
 
 // ************************************************************************* //

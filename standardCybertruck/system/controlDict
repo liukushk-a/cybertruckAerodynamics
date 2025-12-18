@@ -48,14 +48,14 @@ runTimeModifiable true;
 functions
 {
     // residuals
-    # includeFunc residuals(U, p, k, omega);
-    
+    # includeFunc residuals(U, p, k, epsilon);
+
     // Q criterion
     # includeFunc Q
-    
+
     // Vorticity
     # includeFunc vorticity
-    
+
     yPlus
     {
         type    yPlus;
@@ -70,12 +70,13 @@ functions
         type    surfaces;
         libs    ("libsampling.so");
 
+        executeControl        writeTime;
         writeControl    writeTime;
 
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega yPlus Q);
+        fields (p U k epsilon yPlus Q);
 
         surfaces
         (
@@ -175,7 +176,7 @@ functions
                 normal    (1 0 0);
                 point    (-20 0 0);
             }
-            
+
             cutPlane001
             {
                 type    cutPlane;
@@ -236,6 +237,65 @@ functions
         magUInf    30;
         lRef    5.683; // length of the truck
         Aref    1.60; // frontal area
+    }
+
+    fieldAverage1
+    {
+        type        fieldAverage;
+        libs        (fieldFunctionObjects);
+
+        fields
+        (
+            U
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            p
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            k
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            epsilon
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            Q
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            yPlus
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            vorticity
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+        );
+
+        restartOnRestart        true;
+        enabled        true;
+        log        true;
+
+        executeControl        writeTime;
+        writeControl        writeTime;
     }
 
 }

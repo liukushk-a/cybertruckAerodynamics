@@ -18,7 +18,7 @@ simulationType RAS;
 RAS {
   // Tested with kEpsilon, realizableKE, kOmega, kOmega2006, kOmegaSST, v2f,
   // ShihQuadraticKE, LienCubicKE.
-  model kOmegaSST;
+  model realizableKE;
 
   turbulence on;
 
@@ -27,4 +27,14 @@ RAS {
   viscosityModel Newtonian;
 }
 
+//realizableKeCoeffs
+//{
+//    Cmu     0.09;
+//    A0      4.04;
+//    C2      1.92;
+//    sigmaK  1.0;
+//    //alphak      alphak [0 0 0 0 0 0 0] 1.0;
+//    //alphaEps      alphaEps [0 0 0 0 0 0 0] 0.76923;
+//    //alphah      alphah [0 0 0 0 0 0 0] 1.0;
+//}
 // ************************************************************************* //

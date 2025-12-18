@@ -10,13 +10,13 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      omega;
+    object      epsilon;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 -1 0 0 0 0];
+dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform 1.78;
+internalField   uniform 3.3398e-5;
 
 boundaryField
 {
@@ -25,7 +25,7 @@ boundaryField
         type            fixedValue;
         value           $internalField;
     }
-    
+
     "(outlet|upperArea|lateralArea)"
     {
         type            zeroGradient;
@@ -33,7 +33,7 @@ boundaryField
 
     "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
     {
-        type            omegaWallFunction;
+        type            epsilonWallFunction;
         value           $internalField;
     }
 
@@ -43,6 +43,4 @@ boundaryField
     }
 }
 
-
 // ************************************************************************* //
-

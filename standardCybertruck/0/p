@@ -27,14 +27,12 @@ boundaryField
     outlet
     {
         type            fixedValue;
-        //type            fixedValue;
         value           uniform 0;
     }
 
     "(upperArea|lateralArea)"
     {
         type                     zeroGradient;
-        //type                       slip;
     }
 
     "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
