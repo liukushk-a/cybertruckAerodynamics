@@ -42,7 +42,7 @@ boundaryField
 
     FR_mm
     {
-        type            movingWallVelocity;
+        type            rotatingWallVelocity;
         origin          (1.948045 -1.00115  -0.428600);
         axis            (0 1 0);
         omega           67.887126;
@@ -51,7 +51,7 @@ boundaryField
 
     RR_mm
     {
-        type            movingWallVelocity;
+        type            rotatingWallVelocity;
         origin          (-1.726285 -1.00115  -0.428600);
         axis            (0 1 0);
         omega           67.887126;
