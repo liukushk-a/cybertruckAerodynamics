@@ -52,13 +52,94 @@ functions
 
     // Q criterion
     # includeFunc Q
+
+    // Lambda2 criterion
+    # includeFunc Lambda2
     
 	// isoSurface of Q
     # includeFunc isoSurface
     (
-        isoField=Q,
-        isoValue=20,
-        writeEmpty=no
+        isoField = Q,
+        isoValue = 0.01,
+        writeEmpty = no
+    )
+    
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 0.1,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 1,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 20,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 50,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 100,
+        writeEmpty = no
+    )
+
+	// isoSurface of Lambda2
+    # includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -0.01,
+        writeEmpty = no
+    )
+    
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -0.1,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -1,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -20,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -50,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -100,
+        writeEmpty = no
     )
 
     // Vorticity

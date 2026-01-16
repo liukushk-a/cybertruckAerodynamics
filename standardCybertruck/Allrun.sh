@@ -12,6 +12,15 @@ else
     exit 1
 fi
 
+surfaceFeatures > log.surfaceFeatures
+
+if grep -q "End" log.surfaceFeatures; then
+    echo "surfaceFeatures completed successfully."
+else
+    echo "surfaceFeatures failed. Check log.surfaceFeatures for details."
+    exit 1
+fi
+
 paraFoam -touch
 
 mpirun -np 6 decomposePar >log.decomposePar
@@ -45,11 +54,11 @@ fi
 
 checkMesh >log.checkMesh
 
-if grep -q "End" log.checkMesh; then
-    echo "checkMesh completed successfully."
-else
+if grep -q "Failed" log.checkMesh; then
     echo "checkMesh failed. Check log.checkMesh for details."
-    exit 1
+	exit 1
+else
+    echo "checkMesh completed successfully"
 fi
 
 topoSet >log.topoSet
