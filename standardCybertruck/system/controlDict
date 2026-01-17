@@ -201,6 +201,12 @@ functions
                 base        time;
                 allowRestart        true;
             }
+            Lambda2
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
             yPlus
             {
                 mean        yes;
@@ -237,7 +243,7 @@ functions
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega yPlus Q);
+        fields (p U k omega yPlus Q Lambda2);
 
         surfaces
         (
@@ -399,6 +405,45 @@ functions
         lRef    5.683; // length of the truck
         Aref    1.60; // frontal area
     }
+	
+	streamLine01
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 0.1 -0.7);
+			end         (4 0.1 3);
+			nPoints     100;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
 
 	streamLine1
 	{
