@@ -7,3 +7,4 @@ rm -rf log.*
 rm -rf processor*
 rm -rf postProcessing
 rm -rf *.foam
+rm -rf *.OpenFOAM

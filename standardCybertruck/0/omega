@@ -20,26 +20,46 @@ internalField   uniform 1.78;
 
 boundaryField
 {
-    inlet
+    tarmac
     {
-        type            fixedValue;
-        value           $internalField;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
-    
-    "(outlet|upperArea|lateralArea)"
+    upperArea
     {
         type            zeroGradient;
     }
-
-    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
+    inlet
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 1.78;
     }
-
+    outlet
+    {
+        type            zeroGradient;
+    }
+    lateralArea
+    {
+        type            zeroGradient;
+    }
     symmetryPlane
     {
         type            symmetry;
+    }
+    bodyCassoneChiuso_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
+    }
+    FR_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
+    }
+    RR_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
 }
 

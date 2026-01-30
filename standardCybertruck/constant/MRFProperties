@@ -19,7 +19,7 @@ MRF1
     cellZone    movingRR;
 
     // Fixed patches (by default they 'move' with the MRF zone)
-    nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
+    nonRotatingPatches (bodyCassoneChiuso_mm, tarmac, lateralArea, symmetryPlane);
 
     origin      (-1.726285 -1.00115  -0.428600);
     axis        (0 1 0);
@@ -32,7 +32,7 @@ MRF2
     cellZone    movingFR;
 
     // Fixed patches (by default they 'move' with the MRF zone)
-    nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
+    nonRotatingPatches (bodyCassoneChiuso_mm, tarmac, lateralArea, symmetryPlane);
 
     origin      (1.948045 -1.00115  -0.428600);
     axis        (0 1 0);

@@ -20,27 +20,49 @@ internalField   uniform 0;
 
 boundaryField
 {
+    tarmac
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    upperArea
+    {
+        type            calculated;
+        value           uniform 0;
+    }
     inlet
     {
         type            calculated;
         value           uniform 0;
     }
-
-    "(outlet|upperArea|lateralArea)"
+    outlet
     {
         type            calculated;
         value           uniform 0;
     }
-
-    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
+    lateralArea
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    symmetryPlane
+    {
+        type            symmetry;
+    }
+    bodyCassoneChiuso_mm
     {
         type            nutkWallFunction;
         value           uniform 0;
     }
-
-    symmetryPlane
+    FR_mm
     {
-        type            symmetry;
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    RR_mm
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
     }
 }
 

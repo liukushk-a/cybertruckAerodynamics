@@ -61,6 +61,15 @@ else
     echo "checkMesh completed successfully"
 fi
 
+renumberMesh -overwrite >log.renumberMesh
+
+if grep -q "End" log.renumberMesh; then
+    echo "renumberMesh completed successfully."
+else
+    echo "renumberMesh failed. Check log.renumberMesh for details."
+    exit 1
+fi
+
 topoSet >log.topoSet
 
 if grep -q "End" log.topoSet; then
