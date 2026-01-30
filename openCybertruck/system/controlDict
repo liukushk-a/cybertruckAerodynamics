@@ -49,19 +49,137 @@ functions
 {
     // residuals
     # includeFunc residuals(U, p, k, omega);
-    
+
     // Q criterion
     # includeFunc Q
+
+    // Lambda2 criterion
+    # includeFunc Lambda2
     
+	// isoSurface of Q
+    # includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 100,
+        writeEmpty = no
+    )
+    
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 200,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 500,
+        writeEmpty = no
+    )
+	
+	# includeFunc isoSurface
+    (
+        isoField = Q,
+        isoValue = 1000,
+        writeEmpty = no
+    )
+
+	// isoSurface of Lambda2
+	# includeFunc isoSurface
+    (
+        isoField = Lambda2,
+        isoValue = -10000,
+        writeEmpty = no
+    )
+
     // Vorticity
     # includeFunc vorticity
-    
+
+	// Y Plus
     yPlus
     {
         type    yPlus;
         libs    ("libfieldFunctionObjects.so");
 
         writeControl    writeTime;
+    }
+	
+	// Wall Shear Stress
+	wallShearStress
+    {
+        type            wallShearStress;
+        libs            ("libfieldFunctionObjects.so");
+
+        executeControl  timeStep;
+        writeControl    writeTime;
+    }
+
+    fieldAverage1
+    {
+        type        fieldAverage;
+        libs        (fieldFunctionObjects);
+
+        fields
+        (
+            U
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            p
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            k
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            epsilon
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            Q
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            Lambda2
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            yPlus
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+            vorticity
+            {
+                mean        yes;
+                base        time;
+                allowRestart        true;
+            }
+        );
+
+        restartOnRestart        true;
+        enabled        false;
+        log        true;
+
+		timeStart			1000;
+
+        executeControl        timeStep;
+        writeControl        writeTime;
     }
 
     // cutting planes in the wake
@@ -70,12 +188,13 @@ functions
         type    surfaces;
         libs    ("libsampling.so");
 
+        executeControl        writeTime;
         writeControl    writeTime;
 
         surfaceFormat    vtk;
         interpolationScheme    cellPoint;
 
-        fields (p U k omega yPlus Q);
+        fields (p U k omega yPlus Q Lambda2);
 
         surfaces
         (
@@ -96,7 +215,7 @@ functions
                 point    (0 -0.835 0);
                 normal    (0 1 0);
             }
-            
+
             cutPlane1
             {
                 type    cutPlane;
@@ -175,14 +294,23 @@ functions
                 normal    (1 0 0);
                 point    (-20 0 0);
             }
-            
+
             cutPlane001
             {
                 type    cutPlane;
                 interpolate    true;
                 planeType    pointAndNormal;
                 normal    (0 0 1);
-                point    (0 0 0.2);
+                point    (0 0 -0.3);
+            }
+            
+			cutPlane002
+            {
+                type    cutPlane;
+                interpolate    true;
+                planeType    pointAndNormal;
+                normal    (0 0 1);
+                point    (0 0 0.7);
             }
         );
     }
@@ -204,7 +332,7 @@ functions
 
         rho    rhoInf;
         rhoInf    1.225;
-        
+
         CofR    (0 0 0);
         pitchAxis    (0 1 0);
     }
@@ -237,7 +365,240 @@ functions
         lRef    5.683; // length of the truck
         Aref    1.60; // frontal area
     }
+	
+	streamLine01
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
 
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 0.1 -0.7);
+			end         (4 0.1 3);
+			nPoints     100;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
+
+	streamLine1
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 -1.2 0.7);
+			end         (4 1.2 0.7);
+			nPoints     50;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
+	
+	streamLine2
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 -1.2 0.5);
+			end         (4 1.2 0.5);
+			nPoints     50;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
+	
+	streamLine3
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 -1.2 0.3);
+			end         (4 1.2 0.3);
+			nPoints     50;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
+	
+	streamLine4
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 -1.2 0.1);
+			end         (4 1.2 0.1);
+			nPoints     50;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
+	
+	streamLine5
+	{
+		// Mandatory entries (unmodifiable)
+		type            streamlines;
+		libs            ("libfieldFunctionObjects.so");
+
+		// Mandatory entries (runtime modifiable)
+		U               U;
+		fields          (U p);
+		setFormat       vtk;
+		direction       both;
+		lifeTime        10000;
+		cloud           particleTracks;
+		seedSampleSet
+		{
+			type        lineUniform;
+			axis        x;
+			start       (4 -1.2 -0.5);
+			end         (4 1.2 -0.5);
+			nPoints     50;
+		}
+
+		// Optional entries (runtime modifiable)
+		bounds          (-6 -10 -10)(7 10 10);
+		trackLength     1e-2;
+		//nSubCycle       5;
+		//interpolationScheme cellPoint;
+
+		// Deprecated
+		// trackForward true;
+
+		// Optional (inherited) entries
+		region          region0;
+		enabled         true;
+		log             true;
+		executeControl  writeTime;
+		writeControl    writeTime;
+	}
 }
 
 // ************************************************************************* //

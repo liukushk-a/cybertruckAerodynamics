@@ -2,32 +2,20 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  9
+    \\  /    A nd           | Version:  12
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     format      ascii;
     class       dictionary;
-    object      surfaceFeaturesDict;
+    location    "constant";
+    object      physicalProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-surfaces
-(
-	"bodyCassoneChiusoPortapacchi_mm.stl"
-	"FR_mm.stl"
-	"RR_mm.stl"
-);
+viscosityModel  constant;
 
-// Identify a feature when angle between faces < includedAngle
-includedAngle   120;
+nu              1e-05;
 
-// Do not mark region edges
-geometricTestOnly       yes;
-
-// Write options
-
-// Write features to obj format for postprocessing
-writeObj                yes;
-verboseObj              no;
+// ************************************************************************* //

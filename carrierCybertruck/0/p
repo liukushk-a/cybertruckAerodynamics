@@ -9,6 +9,7 @@ FoamFile
 {
     format      ascii;
     class       volScalarField;
+    location    "0";
     object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -19,31 +20,44 @@ internalField   uniform 0;
 
 boundaryField
 {
+    tarmac
+    {
+        type            zeroGradient;
+    }
+    upperArea
+    {
+        type            zeroGradient;
+    }
     inlet
     {
         type            zeroGradient;
     }
-
     outlet
     {
         type            fixedValue;
         value           uniform 0;
     }
-
-    "(upperArea|lateralArea)"
-    {
-        type                     zeroGradient;
-    }
-
-    "(tarmac|bodyCassoneChiuso_mm|FR_mm|RR_mm)"
+    lateralArea
     {
         type            zeroGradient;
     }
-
     symmetryPlane
     {
         type            symmetry;
     }
+    bodyCassoneChiusoPortapacchi_mm
+    {
+        type            zeroGradient;
+    }
+    FR_mm
+    {
+        type            zeroGradient;
+    }
+    RR_mm
+    {
+        type            zeroGradient;
+    }
 }
+
 
 // ************************************************************************* //

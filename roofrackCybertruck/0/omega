@@ -10,59 +10,56 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      nut;
+    object      omega;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -1 0 0 0 0];
+dimensions      [0 0 -1 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 1.78;
 
 boundaryField
 {
     tarmac
     {
-        type            nutkWallFunction;
-        value           uniform 0;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
     upperArea
     {
-        type            calculated;
-        value           uniform 0;
+        type            zeroGradient;
     }
     inlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            fixedValue;
+        value           uniform 1.78;
     }
     outlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            zeroGradient;
     }
     lateralArea
     {
-        type            calculated;
-        value           uniform 0;
+        type            zeroGradient;
     }
     symmetryPlane
     {
         type            symmetry;
     }
-    bodyCassoneAperto_mm
+    bodyRoofrack_mm
     {
-        type            nutkWallFunction;
-        value           uniform 0;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
     FR_mm
     {
-        type            nutkWallFunction;
-        value           uniform 0;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
     RR_mm
     {
-        type            nutkWallFunction;
-        value           uniform 0;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
 }
 

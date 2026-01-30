@@ -15,7 +15,7 @@ FoamFile
 
 surfaces
 (
-	"bodyCassoneChiusoPortapacchi_mm.stl"
+	"bodyRoofrack_mm.stl"
 	"FR_mm.stl"
 	"RR_mm.stl"
 );

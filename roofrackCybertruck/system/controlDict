@@ -327,7 +327,7 @@ functions
 
         patches
         (
-            bodyCassoneChiusoPortapacchi_mm
+            bodyRoofrack_mm
         );
 
         rho    rhoInf;
@@ -349,7 +349,7 @@ functions
 
         patches
         (
-            bodyCassoneChiusoPortapacchi_mm
+            bodyRoofrack_mm
         );
 
         rho    rhoInf;

@@ -27,10 +27,10 @@ addLayers       true;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    bodyCassoneAperto_mm
+    bodyRoofrack_mm
     {
         type triSurfaceMesh;
-        file "bodyCassoneAperto_mm.stl";
+        file "bodyRoofrack_mm.stl";
     }
 
     FR_mm
@@ -127,7 +127,7 @@ castellatedMeshControls
     features
     (
 //        {
-//            file "bodyCassoneAperto_mm.eMesh";
+//            file "bodyRoofrack_mm.eMesh";
 //            level 1;
 //        }
 //        
@@ -144,7 +144,7 @@ castellatedMeshControls
     
 	refinementSurfaces
     {
-        bodyCassoneAperto_mm
+        bodyRoofrack_mm
         {
            // Surface-wise min and max refinement level
             level (5 7);
@@ -295,7 +295,7 @@ addLayersControls
     // Per final patch (so not geometry!) the layer information
     layers
     {
-        "(bodyCassoneAperto_mm|FR_mm|RR_mm).*"
+        "(bodyRoofrack_mm|FR_mm|RR_mm).*"
         {
             nSurfaceLayers 4;
         }

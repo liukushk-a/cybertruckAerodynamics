@@ -49,7 +49,7 @@ boundaryField
     {
         type            symmetry;
     }
-    bodyCassoneAperto_mm
+    bodyRoofrack_mm
     {
         type            nutkWallFunction;
         value           uniform 0;

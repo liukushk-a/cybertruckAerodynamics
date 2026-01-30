@@ -9,36 +9,35 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    object      topoSetDict;
+    location    "constant";
+    object      MRFProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-actions
-(
-    {
-        name    movingRR;
-        type    cellSet;
-        action  new;
-        source  cylinderToCell;
-        sourceInfo
-        {
-            p1 (-1.726285 -1.00115  -0.428600);
-            p2 (-1.726285 -0.671665 -0.428600);
-            radius 0.55;
-        }
-    }
-    {
-        name    movingFR;
-        type    cellSet;
-        action  new;
-        source  cylinderToCell;
-        sourceInfo
-        {
-            p1 (1.948045 -1.00115  -0.428600);
-            p2 (1.948045 -0.671665 -0.428600);
-            radius 0.55;
-        }
-    }
-);
+MRF1
+{
+    cellZone    movingRR;
+
+    // Fixed patches (by default they 'move' with the MRF zone)
+    nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
+
+    origin      (-1.726285 -1.00115  -0.428600);
+    axis        (0 1 0);
+
+    rpm         67.887126;
+}
+
+MRF2
+{
+    cellZone    movingFR;
+
+    // Fixed patches (by default they 'move' with the MRF zone)
+    nonRotatingPatches (bodywork, tarmac, lateralArea, symmetryPlane);
+
+    origin      (1.948045 -1.00115  -0.428600);
+    axis        (0 1 0);
+
+    rpm         67.887126;
+}
 
 // ************************************************************************* //
