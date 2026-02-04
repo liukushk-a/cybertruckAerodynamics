@@ -5,6 +5,8 @@ df = pd.read_csv(
     names = ['Time', 'CL', 'CD', 'CM', 'CL (f)', 'CL (r)']
 )
 
-meanCD = df.loc[-1000:, 'CD'].mean()
+a = int(input("Enter the number of last iterations to average with: "))
+
+meanCD = df.loc[-a:, 'CD'].mean()
 
 print(f"The mean drag coefficient is: {meanCD}")
