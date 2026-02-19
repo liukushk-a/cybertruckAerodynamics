@@ -24,11 +24,22 @@ while flag == 0:
 print(f"\n These are the Mesh sizes: {meshSize}")
 print(f"\n These are the drag coefficient: {cD} ")
 
-fig, ax = plt.subplots()
-ax.plot(meshSize, cD, 'o-', color = 'red', label = 'cD')
-ax.set_xlabel('Mesh Size')
-ax.set_ylabel('cD')
-ax.set_title('Grid convergence analysis for a Cybertruck in standard configuration')
+fig, ax = plt.subplots(figsize = (7,5))
+ax.plot(meshSize, cD, 'o-', color = 'red', label = '$c_D$')
+ax.set_xlabel('Mesh Size', fontsize = 12)
+ax.set_ylabel('Drag Coefficient ($c_D$)', fontsize = 12)
+ax.set_title('Grid convergence analysis for a Cybertruck\nin standard configuration', fontsize = 14, fontweight = 'bold')
 plt.grid(True)
-plt.legend()
+plt.legend(fontsize = 12)
+plt.tight_layout()
 plt.show()
+
+Err = []
+for i in range(len(cD)-1):
+    e =( (cD[i+1] - cD[i])/cD[i+1] ) *100
+    Err.append(e)
+    print('\n'+"-"*40)
+    print(f"\n Error between {meshSize[i+1]} and {meshSize[i]} is equal to: {Err[i]}%")
+    print("\n" + "-"*40)
+
+
