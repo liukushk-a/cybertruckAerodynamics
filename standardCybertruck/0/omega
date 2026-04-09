@@ -16,30 +16,50 @@ FoamFile
 
 dimensions      [0 0 -1 0 0 0 0];
 
-internalField   uniform 440.15;
+internalField   uniform 1.78;
 
 boundaryField
 {
-    inlet
+    tarmac
     {
-        type            fixedValue;
-        value           $internalField;
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
-    
-    "(outlet|upperArea|lateralArea)"
+    upperArea
     {
         type            zeroGradient;
     }
-
-    "(tarmac|bodywork|frontRightTyreBlender|rearRightTyreBlender)"
+    inlet
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 1.78;
     }
-
+    outlet
+    {
+        type            zeroGradient;
+    }
+    lateralArea
+    {
+        type            zeroGradient;
+    }
     symmetryPlane
     {
         type            symmetry;
+    }
+    bodyCassoneChiuso_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
+    }
+    FR_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
+    }
+    RR_mm
+    {
+        type            omegaWallFunction;
+        value           uniform 1.78;
     }
 }
 

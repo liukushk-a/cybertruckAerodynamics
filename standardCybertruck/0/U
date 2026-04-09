@@ -9,6 +9,7 @@ FoamFile
 {
     format      ascii;
     class       volVectorField;
+    location    "0";
     object      U;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -17,59 +18,65 @@ dimensions      [0 1 -1 0 0 0 0];
 
 internalField   uniform (0 0 0);
 
-UInlet            (0 30 0);
-
 boundaryField
 {
+    tarmac
+    {
+        type            fixedValue;
+        value           uniform (-30 0 0);
+    }
+    upperArea
+    {
+        type            fixedValue;
+        value           uniform (-30 0 0);
+    }
     inlet
     {
         type            fixedValue;
-        value           uniform $UInlet;
+        value           uniform (-30 0 0);
     }
-
     outlet
     {
         type            zeroGradient;
     }
-
-    bodywork
+    lateralArea
     {
-        type            noSlip;
+        type            fixedValue;
+        value           uniform (-30 0 0);
     }
-
-    frontRightTyreBlender
-    {
-        type            rotatingWallVelocity;
-        origin          (2.20515 -3.241555 0.729127);
-        axis            (1 0 0);
-        omega           67.887126;
-        value           uniform (0 0 0);
-    }
-
-    rearRightTyreBlender
-    {
-        type            rotatingWallVelocity;
-        origin          (2.20515 0.4327766 0.729127);
-        axis            (1 0 0);
-        omega           67.887126;
-        value           uniform (0 0 0);
-    }
-
-    tarmac
-    {
-        type            slip;
-    }
-
-    "(upperArea|lateralArea)"
-    {
-        type            freestreamVelocity;
-        freestreamValue    uniform $UInlet;
-    }
-
     symmetryPlane
     {
         type            symmetry;
     }
+    bodyCassoneChiuso_mm
+    {
+        type            noSlip;
+    }
+    FR_mm
+    {
+        type            rotatingWallVelocity;
+        origin          (1.94805 -1.00115 -0.4286);
+        axis            (0 1 0);
+        omega           
+        {
+            type            constant;
+            value           67.8871;
+        }
+        value           uniform (0 0 0);
+    }
+    RR_mm
+    {
+        type            rotatingWallVelocity;
+        origin          (-1.72629 -1.00115 -0.4286);
+        axis            (0 1 0);
+        omega           
+        {
+            type            constant;
+            value           67.8871;
+        }
+        value           uniform (0 0 0);
+    }
 }
+
 
 // ************************************************************************* //
