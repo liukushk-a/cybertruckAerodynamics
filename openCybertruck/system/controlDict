@@ -17,7 +17,7 @@ application     foamRun;
 
 solver          incompressibleFluid;
 
-startFrom       startTime;
+startFrom       latestTime;
 
 startTime       0;
 
@@ -173,10 +173,10 @@ functions
         );
 
         restartOnRestart        true;
-        enabled        false;
+        enabled        true;
         log        true;
 
-		timeStart			1000;
+		//timeStart			1000;
 
         executeControl        timeStep;
         writeControl        writeTime;

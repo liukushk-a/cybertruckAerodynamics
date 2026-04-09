@@ -173,7 +173,7 @@ functions
         );
 
         restartOnRestart        true;
-        enabled        false;
+        enabled        true;
         log        true;
 
 		timeStart			1000;

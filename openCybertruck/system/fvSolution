@@ -55,6 +55,14 @@ SIMPLE
 {
     nNonOrthogonalCorrectors 3;
     consistent yes;
+	turbOnFinalIterOnly		 false;
+    
+	residualControl
+    {
+        p               1e-4;
+        U               1e-5;
+        "(k|omega|f|v2)" 1e-5;
+    }
 }
 
 potentialFlow
